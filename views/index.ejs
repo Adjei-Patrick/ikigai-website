@@ -1,0 +1,49 @@
+<section class="hero">
+    <div class="hero-content">
+        <h1>Solutions Digitales Innovantes</h1>
+        <p>Transformez votre entreprise avec nos services de développement web, solutions ERP et architecture réseau</p>
+        <a href="/contact" class="cta-button">Contactez-nous</a>
+    </div>
+</section>
+
+<section class="services-preview">
+    <h2>Nos Services</h2>
+    <div class="services-grid">
+        <% services.forEach(service => { %>
+            <div class="service-card">
+                <i class="fas fa-<%= service.icon %>"></i>
+                <h3><%= service.title %></h3>
+                <p><%= service.description %></p>
+            </div>
+        <% }); %>
+    </div>
+</section>
+
+<section class="why-choose-us">
+    <h2>Pourquoi Nous Choisir ?</h2>
+    <div class="features-grid">
+        <div class="feature">
+            <i class="fas fa-check-circle"></i>
+            <h3>Expertise</h3>
+            <p>Une équipe d'experts passionnés par l'innovation</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-clock"></i>
+            <h3>Réactivité</h3>
+            <p>Des solutions adaptées à vos besoins en temps réel</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Sécurité</h3>
+            <p>Des solutions robustes et sécurisées</p>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="cta-content">
+        <h2>Prêt à Transformer Votre Entreprise ?</h2>
+        <p>Contactez-nous pour discuter de votre projet</p>
+        <a href="/contact" class="cta-button">Démarrer un Projet</a>
+    </div>
+</section> 
