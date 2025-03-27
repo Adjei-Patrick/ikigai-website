@@ -75,6 +75,8 @@ app.use((err, req, res, next) => {
     });
 });
 
+// Ajout d'un message de log pour le débogage
 app.listen(port, () => {
-    console.log(`Serveur démarré sur http://localhost:${port}`);
+    console.log(`Serveur démarré sur le port ${port}`);
+    console.log(`URL: http://localhost:${port}`);
 }); 
