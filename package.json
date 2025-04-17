@@ -1,22 +1,21 @@
 {
-  "name": "ikigai-website",
+  "name": "ikigai-web",
   "version": "1.0.0",
-  "description": "Site web professionnel d'IKIGAI - Services de développement web, solutions ERP et architecture réseau",
+  "description": "Application web Ikigaï avec formulaire de contact",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "init-db": "node scripts/init-db.js"
   },
   "dependencies": {
-    "axios": "^1.6.2",
-    "compression": "^1.7.4",
-    "dotenv": "^16.3.1",
-    "ejs": "^3.1.9",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "express-ejs-layouts": "^2.5.1",
-    "helmet": "^7.1.0"
+    "pg": "^8.10.0",
+    "ejs": "^3.1.9",
+    "body-parser": "^1.20.2"
   },
   "devDependencies": {
-    "nodemon": "^3.0.2"
+    "nodemon": "^2.0.22"
   }
 }
