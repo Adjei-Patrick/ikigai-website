@@ -418,12 +418,49 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 0.5rem;
+    }
+
+    .logo {
+        width: 100%;
+        padding: 1rem;
+        background-color: var(--white);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     .nav-links {
         display: none;
+        width: 100%;
+        flex-direction: column;
+        background-color: var(--white);
+        padding: 1rem 0;
+        margin: 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .nav-links li:last-child {
+        border-bottom: none;
     }
 
     .mobile-menu {
         display: block;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--primary-color);
     }
 
     .hero h1 {
