@@ -1,77 +1,49 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <div class="container">
-                <a href="/" class="logo">IKIGAI</a>
-                <ul>
-                    <li><a href="/">Accueil</a></li>
-                    <li><a href="/services">Services</a></li>
-                    <li><a href="/about">À propos</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+<section class="hero">
+    <div class="hero-content">
+        <h1>Solutions Digitales Innovantes</h1>
+        <p>Transformez votre entreprise avec nos services de développement web, solutions ERP et architecture réseau</p>
+        <a href="/contact" class="cta-button">Contactez-nous</a>
+    </div>
+</section>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Solutions Digitales sur Mesure</h1>
-                <p>Transformez votre vision en réalité avec nos solutions web innovantes</p>
-                <a href="/contact" class="cta-button">Démarrer votre projet</a>
+<section class="services-preview">
+    <h2>Nos Services</h2>
+    <div class="services-grid">
+        <% services.forEach(service => { %>
+            <div class="service-card">
+                <i class="fas fa-<%= service.icon %>"></i>
+                <h3><%= service.title %></h3>
+                <p><%= service.description %></p>
             </div>
-        </section>
+        <% }); %>
+    </div>
+</section>
 
-        <section class="services">
-            <div class="container">
-                <h2>Nos Services</h2>
-                <div class="services-grid">
-                    <% services.forEach(function(service) { %>
-                        <div class="service-card">
-                            <div class="service-icon <%= service.icon %>"></div>
-                            <h3><%= service.title %></h3>
-                            <p><%= service.description %></p>
-                            <a href="/services" class="learn-more">En savoir plus</a>
-                        </div>
-                    <% }); %>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>IKIGAI</h4>
-                    <p>Solutions digitales innovantes pour votre entreprise</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>Email: contact@ikigai.com</p>
-                    <p>Tél: +225 XX XX XX XX</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Liens rapides</h4>
-                    <ul>
-                        <li><a href="/services">Services</a></li>
-                        <li><a href="/about">À propos</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; <%= new Date().getFullYear() %> IKIGAI. Tous droits réservés.</p>
-            </div>
+<section class="why-choose-us">
+    <h2>Pourquoi Nous Choisir ?</h2>
+    <div class="features-grid">
+        <div class="feature">
+            <i class="fas fa-check-circle"></i>
+            <h3>Expertise</h3>
+            <p>Une équipe de jeunes passionnés par l'innovation</p>
         </div>
-    </footer>
-</body>
-</html> 
+        <div class="feature">
+            <i class="fas fa-clock"></i>
+            <h3>Réactivité</h3>
+            <p>Des solutions adaptées à vos besoins en temps réel</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Sécurité</h3>
+            <p>Des solutions robustes et sécurisées</p>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="cta-content">
+        <h2>Prêt à Transformer Votre Entreprise ?</h2>
+        <p>Contactez-nous pour discuter de votre projet</p>
+        <a href="/contact" class="cta-button">Démarrer un Projet</a>
+    </div>
+</section> 

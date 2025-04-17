@@ -6,31 +6,4 @@ services:
     startCommand: npm start
     envVars:
       - key: PORT
-        value: 10000
-      - key: NODE_ENV
-        value: production
-      - key: DB_HOST
-        fromDatabase:
-          name: ikigai-db
-          property: host
-      - key: DB_NAME
-        fromDatabase:
-          name: ikigai-db
-          property: database
-      - key: DB_USER
-        fromDatabase:
-          name: ikigai-db
-          property: user
-      - key: DB_PASSWORD
-        fromDatabase:
-          name: ikigai-db
-          property: password
-      - key: DB_PORT
-        fromDatabase:
-          name: ikigai-db
-          property: port
-
-databases:
-  - name: ikigai-db
-    plan: free
-    type: postgres 
+        value: 10000 
