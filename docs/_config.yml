@@ -1,0 +1,25 @@
+title: Ikigaï Web
+description: Solutions web sur mesure, applications modernes et responsives
+theme: jekyll-theme-primer
+baseurl: "/ikigai-website"
+url: "https://adjei-patrick.github.io"
+
+# Configuration des plugins
+plugins:
+  - jekyll-seo-tag
+  - jekyll-github-metadata
+  - jekyll-relative-links
+
+# Configuration du contenu
+exclude:
+  - node_modules
+  - scripts
+  - config
+  - controllers
+  - database
+  - .env
+  - .env.example
+  - package.json
+  - package-lock.json
+  - README.md
+  - render.yaml 
