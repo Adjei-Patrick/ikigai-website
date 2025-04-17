@@ -9,15 +9,15 @@
             <h2>Informations de Contact</h2>
             <div class="info-item">
                 <i class="fas fa-map-marker-alt"></i>
-                <p>Abidjan, Côte d'Ivoire</p>
+                <p>123 Rue de l'Innovation<br>75001 Paris, France</p>
             </div>
             <div class="info-item">
                 <i class="fas fa-phone"></i>
-                <p>+225 07 77 55 69 28</p>
+                <p>+33 1 23 45 67 89</p>
             </div>
             <div class="info-item">
                 <i class="fas fa-envelope"></i>
-                <p>Koffiadjeipatrick@gmail.com</p>
+                <p>contact@ikigai.com</p>
             </div>
         </div>
 
@@ -40,6 +40,173 @@
                     <option value="other">Autre</option>
                 </select>
             </div>
+
+            <!-- Questionnaire pour le développement web -->
+            <div id="web-questionnaire" class="form-questionnaire" style="display: none;">
+                <h3>Détails du projet web</h3>
+
+                <!-- Section I : Compréhension Générale du Projet -->
+                <div class="questionnaire-section">
+                    <h4>I. Compréhension Générale du Projet</h4>
+                    
+                    <div class="form-group">
+                        <label for="project-objective">Objectif principal de l'application</label>
+                        <select id="project-objective" name="project-objective">
+                            <option value="">Sélectionnez l'objectif principal</option>
+                            <option value="sales">Augmenter les ventes</option>
+                            <option value="communication">Améliorer la communication</option>
+                            <option value="automation">Automatiser des processus</option>
+                            <option value="other">Autre (à préciser)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="target-audience">Public cible</label>
+                        <textarea id="target-audience" name="target-audience" rows="3" placeholder="Décrivez votre public cible (âge, profession, localisation, niveau technique...)"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-needs">Besoins et problèmes à résoudre</label>
+                        <textarea id="project-needs" name="project-needs" rows="3" placeholder="Quels problèmes votre application doit-elle résoudre ?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inspiration">Applications de référence</label>
+                        <textarea id="inspiration" name="inspiration" rows="3" placeholder="Y a-t-il des applications web qui vous inspirent ?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="domain-hosting">Nom de domaine et hébergement</label>
+                        <textarea id="domain-hosting" name="domain-hosting" rows="2" placeholder="Avez-vous déjà un nom de domaine et un hébergement ?"></textarea>
+                    </div>
+                </div>
+
+                <!-- Section II : Fonctionnalités et Caractéristiques -->
+                <div class="questionnaire-section">
+                    <h4>II. Fonctionnalités et Caractéristiques</h4>
+
+                    <div class="form-group">
+                        <label for="mvp-features">Fonctionnalités essentielles (MVP)</label>
+                        <textarea id="mvp-features" name="mvp-features" rows="3" placeholder="Listez les fonctionnalités indispensables au lancement"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="secondary-features">Fonctionnalités secondaires</label>
+                        <textarea id="secondary-features" name="secondary-features" rows="3" placeholder="Listez les fonctionnalités qui pourraient être ajoutées plus tard"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Fonctionnalités techniques requises</label>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="tech_features" value="user_accounts">
+                                Gestion des comptes utilisateurs
+                            </label>
+                            <label>
+                                <input type="checkbox" name="tech_features" value="user_roles">
+                                Différents rôles utilisateurs
+                            </label>
+                            <label>
+                                <input type="checkbox" name="tech_features" value="database">
+                                Base de données PostgreSQL
+                            </label>
+                            <label>
+                                <input type="checkbox" name="tech_features" value="geolocation">
+                                Géolocalisation
+                            </label>
+                            <label>
+                                <input type="checkbox" name="tech_features" value="api_integration">
+                                Intégrations API externes
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="security-requirements">Exigences de sécurité</label>
+                        <textarea id="security-requirements" name="security-requirements" rows="3" placeholder="Décrivez vos besoins en matière de sécurité et de confidentialité"></textarea>
+                    </div>
+                </div>
+
+                <!-- Section III : Design et UX/UI -->
+                <div class="questionnaire-section">
+                    <h4>III. Design et Expérience Utilisateur</h4>
+
+                    <div class="form-group">
+                        <label for="visual-style">Style visuel souhaité</label>
+                        <select id="visual-style" name="visual-style" multiple>
+                            <option value="modern">Moderne</option>
+                            <option value="minimal">Épuré</option>
+                            <option value="professional">Professionnel</option>
+                            <option value="creative">Créatif</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Besoins en design</label>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="design_needs" value="branding">
+                                Charte graphique existante
+                            </label>
+                            <label>
+                                <input type="checkbox" name="design_needs" value="wireframes">
+                                Maquettes (wireframes)
+                            </label>
+                            <label>
+                                <input type="checkbox" name="design_needs" value="prototype">
+                                Prototype interactif
+                            </label>
+                            <label>
+                                <input type="checkbox" name="design_needs" value="accessibility">
+                                Accessibilité web
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section IV : Maintenance et Évolution -->
+                <div class="questionnaire-section">
+                    <h4>IV. Maintenance et Évolution</h4>
+
+                    <div class="form-group">
+                        <label for="maintenance">Besoins en maintenance</label>
+                        <textarea id="maintenance" name="maintenance" rows="3" placeholder="Qui sera responsable de la maintenance ? Quels sont vos besoins en support technique ?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="future-evolution">Évolutions futures</label>
+                        <textarea id="future-evolution" name="future-evolution" rows="3" placeholder="Quelles évolutions envisagez-vous pour l'avenir ?"></textarea>
+                    </div>
+                </div>
+
+                <!-- Section V : Aspects Légaux -->
+                <div class="questionnaire-section">
+                    <h4>V. Aspects Légaux et Réglementaires</h4>
+
+                    <div class="form-group">
+                        <label for="legal-requirements">Exigences légales</label>
+                        <textarea id="legal-requirements" name="legal-requirements" rows="3" placeholder="Y a-t-il des réglementations spécifiques à prendre en compte ?"></textarea>
+                    </div>
+                </div>
+
+                <!-- Budget et Délai -->
+                <div class="form-group">
+                    <label for="budget">Budget estimé</label>
+                    <select id="budget" name="budget">
+                        <option value="">Sélectionnez une fourchette</option>
+                        <option value="small">Moins de 5000€</option>
+                        <option value="medium">5000€ - 10000€</option>
+                        <option value="large">10000€ - 20000€</option>
+                        <option value="enterprise">Plus de 20000€</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="deadline">Date souhaitée de mise en ligne</label>
+                    <input type="date" id="deadline" name="deadline">
+                </div>
+            </div>
+
             <div class="form-group">
                 <label for="message">Message</label>
                 <textarea id="message" name="message" rows="5" required></textarea>
@@ -47,4 +214,66 @@
             <button type="submit" class="submit-button">Envoyer le message</button>
         </form>
     </div>
-</section> 
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const subjectSelect = document.getElementById('subject');
+    const webQuestionnaire = document.getElementById('web-questionnaire');
+    const contactForm = document.querySelector('.contact-form');
+
+    // Afficher/masquer le questionnaire web
+    subjectSelect.addEventListener('change', function() {
+        if (this.value === 'web') {
+            webQuestionnaire.style.display = 'block';
+        } else {
+            webQuestionnaire.style.display = 'none';
+        }
+    });
+
+    // Gestion de la soumission du formulaire
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        // Récupération des données du formulaire
+        const formData = new FormData(this);
+        const data = {};
+
+        // Conversion des données du formulaire en objet
+        for (let [key, value] of formData.entries()) {
+            if (key === 'tech_features' || key === 'design_needs') {
+                if (!data[key]) {
+                    data[key] = [];
+                }
+                data[key].push(value);
+            } else if (key === 'visual_style') {
+                data[key] = Array.from(document.getElementById('visual-style').selectedOptions).map(option => option.value);
+            } else {
+                data[key] = value;
+            }
+        }
+
+        try {
+            const response = await fetch('/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                alert(result.message);
+                contactForm.reset();
+                webQuestionnaire.style.display = 'none';
+            } else {
+                throw new Error(result.message);
+            }
+        } catch (error) {
+            alert('Une erreur est survenue lors de l\'envoi du message: ' + error.message);
+        }
+    });
+});
+</script> 
