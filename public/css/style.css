@@ -377,12 +377,14 @@ body {
     gap: 3rem;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 2rem;
 }
 
 .contact-info {
     background-color: var(--light-gray);
     padding: 2rem;
     border-radius: 10px;
+    height: fit-content;
 }
 
 .info-item {
@@ -397,15 +399,15 @@ body {
     margin-right: 1rem;
 }
 
-.contact-form {
-    background-color: var(--white);
-    padding: 2rem;
+.contact-form-container {
+    background: #f5f6fa;
+    padding: 1.5rem;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .form-group label {
@@ -454,6 +456,213 @@ body {
     color: var(--primary-color);
     font-size: 2.5rem;
     margin-bottom: 1rem;
+}
+
+/* Styles pour le formulaire de contact */
+.subject-selector {
+    margin-bottom: 2rem;
+}
+
+.subject-selector select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.web-dev-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.form-section {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.form-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.question-group {
+    margin-bottom: 1.5rem;
+}
+
+.question-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.question-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.9);
+    resize: vertical;
+    min-height: 100px;
+}
+
+.email-group {
+    margin-bottom: 1rem;
+}
+
+.email-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.submit-btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    align-self: flex-end;
+}
+
+.submit-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Form Pages (Contact & Login) */
+.form-page {
+    padding: 5rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 0.75rem;
+}
+
+.form-header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0;
+}
+
+.form-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.contact-form-container {
+    background: #f5f6fa;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.form-group label i {
+    color: var(--secondary-color);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+}
+
+.alert {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.alert-danger {
+    background-color: #fff2f2;
+    border: 1px solid #ffd1d1;
+    color: #d63031;
+}
+
+.submit-btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 auto;
+}
+
+.submit-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.submit-btn i {
+    transition: transform 0.3s ease;
+}
+
+.submit-btn:hover i {
+    transform: translateX(3px);
+}
+
+@media (max-width: 768px) {
+    .form-page {
+        padding: 3rem 1rem;
+    }
+
+    .form-header h1 {
+        font-size: 2rem;
+    }
+
+    .contact-form-container {
+        padding: 1.5rem;
+    }
 }
 
 /* Responsive Design */

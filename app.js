@@ -4,17 +4,60 @@ const ejs = require('ejs');
 const compression = require('compression');
 const helmet = require('helmet');
 const expressLayouts = require('express-ejs-layouts');
+const session = require('express-session');
+const { rateLimit } = require('./middleware/rateLimit');
 require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Middleware
-app.use(helmet());
+// Import des routes
+const mainRoutes = require('./routes/main');
+const apiRoutes = require('./routes/api');
+const authRoutes = require('./routes/auth');
+const formController = require('./controllers/formController');
+const { isAuthenticated } = require('./middleware/auth');
+
+// Initialiser la base de données
+formController.initializeDatabase();
+
+// Configuration de base
 app.use(compression());
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Configuration de la session
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'votre_secret_temporaire',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000 // 24 heures
+    }
+}));
+
+// Middleware de limitation des tentatives de connexion
+app.use(rateLimit);
+
+// Configuration de Helmet avec CSP personnalisé
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdnjs.cloudflare.com"],
+            styleSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com", "https://www.gstatic.com"],
+            imgSrc: ["'self'", "data:", "https:"],
+            fontSrc: ["'self'", "https://cdnjs.cloudflare.com"],
+            connectSrc: ["'self'"],
+            objectSrc: ["'none'"],
+            mediaSrc: ["'self'"],
+            frameSrc: ["'none'"]
+        }
+    }
+}));
 
 // Configuration EJS
 app.set('view engine', 'ejs');
@@ -23,6 +66,14 @@ app.use(expressLayouts);
 app.set('layout', 'layout');
 app.set("layout extractScripts", true);
 app.set("layout extractStyles", true);
+
+// Protection de la route admin
+app.use('/admin', isAuthenticated);
+
+// Montage des routes
+app.use('/', authRoutes); // Routes d'authentification en premier
+app.use('/', mainRoutes);
+app.use('/api', apiRoutes);
 
 // Routes
 app.get('/', (req, res) => {
