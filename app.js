@@ -47,16 +47,32 @@ app.use(helmet({
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"],
-            scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdnjs.cloudflare.com"],
-            styleSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com", "https://www.gstatic.com"],
+            scriptSrc: [
+                "'self'",
+                "'unsafe-inline'",
+                "'unsafe-eval'",
+                "https://cdnjs.cloudflare.com"
+            ],
+            styleSrc: [
+                "'self'",
+                "'unsafe-inline'",
+                "https://cdnjs.cloudflare.com",
+                "https://fonts.googleapis.com"
+            ],
             imgSrc: ["'self'", "data:", "https:"],
-            fontSrc: ["'self'", "https://cdnjs.cloudflare.com"],
+            fontSrc: [
+                "'self'",
+                "https://cdnjs.cloudflare.com",
+                "https://fonts.gstatic.com"
+            ],
             connectSrc: ["'self'"],
             objectSrc: ["'none'"],
             mediaSrc: ["'self'"],
-            frameSrc: ["'none'"]
+            frameSrc: ["'none'"],
+            formAction: ["'self'"]
         }
-    }
+    },
+    crossOriginEmbedderPolicy: false
 }));
 
 // Configuration EJS
