@@ -9,11 +9,15 @@ const ADMIN_PASSWORD_HASH = '$2b$10$q4hsZd07nFzkS2EIhyAsLOatAkQAkY3EziMPQRmtat.K
 const login = async (req, res) => {
     const { username, password } = req.body;
     
-    // Debug logs
-    console.log('Tentative de connexion:');
+    // Debug logs améliorés
+    console.log('=== Tentative de connexion ===');
+    console.log('Environment:', process.env.NODE_ENV);
+    console.log('Session Secret configuré:', !!process.env.SESSION_SECRET);
     console.log('Username reçu:', username);
     console.log('Username attendu:', ADMIN_USERNAME);
     console.log('Password reçu (longueur):', password ? password.length : 0);
+    console.log('Session actuelle:', req.session);
+    console.log('Cookies:', req.headers.cookie);
 
     try {
         // Vérifier si les identifiants sont corrects
@@ -46,6 +50,8 @@ const login = async (req, res) => {
         req.session.isAuthenticated = true;
         req.session.username = username;
         req.session.lastActivity = Date.now();
+
+        console.log('Session après authentification:', req.session);
 
         // Rediriger vers la page d'administration
         res.redirect('/admin');
