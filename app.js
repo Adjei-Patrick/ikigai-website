@@ -35,12 +35,19 @@ app.use(session({
     cookie: {
         secure: process.env.NODE_ENV === 'production',
         httpOnly: true,
+        sameSite: 'none', // Important pour Render
         maxAge: 24 * 60 * 60 * 1000 // 24 heures
     }
 }));
 
 // Middleware de limitation des tentatives de connexion
 app.use(rateLimit);
+
+// Middleware de logging
+app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    next();
+});
 
 // Configuration de Helmet avec CSP personnalisé
 app.use(helmet({
@@ -133,12 +140,19 @@ app.get('/contact', (req, res) => {
     });
 });
 
-// Gestion des erreurs
+// Route de health check
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+});
+
+// En cas d'erreur
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).render('error', {
-        title: 'Erreur - IKIGAI',
-        message: 'Une erreur est survenue'
+    console.error('Erreur:', err);
+    console.error('Stack:', err.stack);
+    res.status(500).json({
+        success: false,
+        message: 'Une erreur est survenue',
+        error: process.env.NODE_ENV === 'development' ? err.message : undefined
     });
 });
 
@@ -146,4 +160,6 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
     console.log(`Serveur démarré sur le port ${port}`);
     console.log(`URL: http://localhost:${port}`);
-}); 
+});
+
+app.set('trust proxy', 1); // Ajout de la configuration pour Render 
