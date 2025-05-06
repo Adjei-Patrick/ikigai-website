@@ -10,4 +10,10 @@ services:
       - key: NODE_ENV
         value: production
       - key: SESSION_SECRET
-        generateValue: true # Cela générera automatiquement une valeur sécurisée 
+        generateValue: true
+    healthCheckPath: /health
+    autoDeploy: true
+    disk:
+      name: sqlite-data
+      mountPath: /opt/render/project/src/database
+      sizeGB: 1 

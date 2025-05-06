@@ -21,24 +21,65 @@ const { isAuthenticated } = require('./middleware/auth');
 // Initialiser la base de données
 formController.initializeDatabase();
 
+// Middleware de logging pour le débogage
+app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    if (req.body) {
+        const sanitizedBody = { ...req.body };
+        if (sanitizedBody.password) sanitizedBody.password = '[HIDDEN]';
+        console.log('Body:', sanitizedBody);
+    }
+    next();
+});
+
 // Configuration de base
 app.use(compression());
-app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Configuration simple pour le développement local
+if (process.env.NODE_ENV !== 'production') {
+    app.use((req, res, next) => {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+        if (req.method === 'OPTIONS') {
+            return res.sendStatus(200);
+        }
+        next();
+    });
+}
+
+app.use(express.static('public'));
+
 // Configuration de la session
-app.use(session({
+const sessionConfig = {
     secret: process.env.SESSION_SECRET || 'votre_secret_temporaire',
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     cookie: {
-        secure: process.env.NODE_ENV === 'production',
         httpOnly: true,
-        sameSite: 'none', // Important pour Render
         maxAge: 24 * 60 * 60 * 1000 // 24 heures
     }
-}));
+};
+
+// Ajuster la configuration des cookies en production
+if (process.env.NODE_ENV === 'production') {
+    app.set('trust proxy', 1); // Nécessaire pour Render
+    sessionConfig.cookie.secure = true; // Utiliser HTTPS en production
+    sessionConfig.cookie.sameSite = 'none'; // Nécessaire pour Render
+}
+
+app.use(session(sessionConfig));
+
+// Middleware pour vérifier la session sur chaque requête
+app.use((req, res, next) => {
+    if (process.env.NODE_ENV === 'development') {
+        console.log('Session:', req.session);
+        console.log('Authentifié:', req.session.isAuthenticated);
+    }
+    next();
+});
 
 // Middleware de limitation des tentatives de connexion
 app.use(rateLimit);
@@ -140,15 +181,18 @@ app.get('/contact', (req, res) => {
     });
 });
 
-// Route de health check
+// Route de health check pour Render
 app.get('/health', (req, res) => {
-    res.status(200).send('OK');
+    res.status(200).json({
+        status: 'healthy',
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime()
+    });
 });
 
-// En cas d'erreur
+// Gestion des erreurs
 app.use((err, req, res, next) => {
     console.error('Erreur:', err);
-    console.error('Stack:', err.stack);
     res.status(500).json({
         success: false,
         message: 'Une erreur est survenue',
@@ -162,4 +206,4 @@ app.listen(port, () => {
     console.log(`URL: http://localhost:${port}`);
 });
 
-app.set('trust proxy', 1); // Ajout de la configuration pour Render 
+app.set('trust proxy', 1); // Ajout de la configuration pour Render

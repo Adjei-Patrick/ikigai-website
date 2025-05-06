@@ -8,42 +8,33 @@ const ADMIN_PASSWORD_HASH = '$2b$10$q4hsZd07nFzkS2EIhyAsLOatAkQAkY3EziMPQRmtat.K
 
 const login = async (req, res) => {
     const { username, password } = req.body;
+    const isAjax = req.xhr || req.headers.accept.includes('application/json');
     
-    // Debug logs améliorés
     console.log('=== Tentative de connexion ===');
-    console.log('Environment:', process.env.NODE_ENV);
-    console.log('Session Secret configuré:', !!process.env.SESSION_SECRET);
+    console.log('Type de requête:', isAjax ? 'AJAX' : 'Normal');
     console.log('Username reçu:', username);
-    console.log('Username attendu:', ADMIN_USERNAME);
-    console.log('Password reçu (longueur):', password ? password.length : 0);
-    console.log('Session actuelle:', req.session);
-    console.log('Cookies:', req.headers.cookie);
 
     try {
-        // Vérifier si les identifiants sont corrects
+        // Vérifier le nom d'utilisateur
         if (username !== ADMIN_USERNAME) {
             console.log('Échec: nom d\'utilisateur incorrect');
-            return res.render('login', {
-                title: 'Connexion - IKIGAI',
-                error: 'Identifiants invalides'
-            });
+            return isAjax
+                ? res.status(401).json({ success: false, message: 'Identifiants invalides' })
+                : res.render('login', { title: 'Connexion - IKIGAI', error: 'Identifiants invalides' });
         }
 
         // Vérifier le mot de passe
         const isPasswordValid = await bcrypt.compare(password, ADMIN_PASSWORD_HASH);
-        console.log('Résultat de la comparaison du mot de passe:', isPasswordValid);
+        console.log('Validation du mot de passe:', isPasswordValid);
         
         if (!isPasswordValid) {
             console.log('Échec: mot de passe incorrect');
-            return res.render('login', {
-                title: 'Connexion - IKIGAI',
-                error: 'Identifiants invalides'
-            });
+            return isAjax
+                ? res.status(401).json({ success: false, message: 'Identifiants invalides' })
+                : res.render('login', { title: 'Connexion - IKIGAI', error: 'Identifiants invalides' });
         }
 
         console.log('Connexion réussie !');
-
-        // Réinitialiser les tentatives de connexion
         resetLoginAttempts(req.ip);
 
         // Créer la session
@@ -51,17 +42,18 @@ const login = async (req, res) => {
         req.session.username = username;
         req.session.lastActivity = Date.now();
 
-        console.log('Session après authentification:', req.session);
-
-        // Rediriger vers la page d'administration
-        res.redirect('/admin');
+        // Répondre selon le type de requête
+        if (isAjax) {
+            res.json({ success: true, redirect: '/admin' });
+        } else {
+            res.redirect('/admin');
+        }
 
     } catch (error) {
         console.error('Erreur lors de la connexion:', error);
-        res.render('login', {
-            title: 'Connexion - IKIGAI',
-            error: 'Une erreur est survenue lors de la connexion'
-        });
+        return isAjax
+            ? res.status(500).json({ success: false, message: 'Une erreur est survenue lors de la connexion' })
+            : res.render('login', { title: 'Connexion - IKIGAI', error: 'Une erreur est survenue lors de la connexion' });
     }
 };
 

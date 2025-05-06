@@ -1,5 +1,12 @@
 const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('database/form.db');
+const path = require('path');
+
+// Chemin de la base de données adapté pour la production
+const dbPath = process.env.NODE_ENV === 'production'
+    ? path.join(process.env.RENDER_DISK_MOUNT_PATH || '/opt/render/project/src/database', 'form.db')
+    : path.join(__dirname, '../database/form.db');
+
+const db = new sqlite3.Database(dbPath);
 
 // Initialiser la base de données
 function initializeDatabase() {

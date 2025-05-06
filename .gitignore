@@ -4,25 +4,37 @@ npm-debug.log
 yarn-debug.log
 yarn-error.log
 
-# Variables d'environnements
+# Environnement
 .env
 .env.local
 .env.*.local
 
-# Fichiers système
+# Base de données
+*.sqlite
+*.db
+database/*.db
+
+# Logs
+logs
+*.log
+
+# Système
 .DS_Store
 Thumbs.db
 
-# Fichiers d'éditeur
-.vscode/
+# IDE
 .idea/
+.vscode/
 *.swp
 *.swo
 
-# Logs
-logs/
-*.log
-
-# Fichiers de build
+# Build
 dist/
-build/ 
+build/
+.next/
+out/
+
+# Divers
+coverage/
+.nyc_output/
+.cache/ 
