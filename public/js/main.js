@@ -1,10 +1,42 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Gestion du menu mobile
-    const mobileMenuBtn = document.querySelector('.mobile-menu');
+    const mobileMenu = document.querySelector('.mobile-menu');
     const navLinks = document.querySelector('.nav-links');
 
-    mobileMenuBtn.addEventListener('click', () => {
-        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    mobileMenu.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+        // Change l'icône du menu
+        const menuIcon = this.querySelector('i');
+        if (navLinks.classList.contains('active')) {
+            menuIcon.classList.remove('fa-bars');
+            menuIcon.classList.add('fa-times');
+        } else {
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars');
+        }
+    });
+
+    // Ferme le menu si on clique en dehors
+    document.addEventListener('click', function(event) {
+        const isClickInsideMenu = navLinks.contains(event.target);
+        const isClickOnMenuButton = mobileMenu.contains(event.target);
+        
+        if (!isClickInsideMenu && !isClickOnMenuButton && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+            const menuIcon = mobileMenu.querySelector('i');
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars');
+        }
+    });
+
+    // Ferme le menu quand on clique sur un lien
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            const menuIcon = mobileMenu.querySelector('i');
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars');
+        });
     });
 
     // Animation au scroll
